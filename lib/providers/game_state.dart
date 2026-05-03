@@ -29,6 +29,10 @@ class GameState extends ChangeNotifier {
   List<int> linesBeingCleared = [];
   double clearAnimationProgress = 0.0;
   bool isAnimatingClear = false;
+  
+  // Row shift animation state
+  Map<int, double> rowOffsets = {}; 
+  bool isAnimatingShift = false;
 
   GameState() {
     _initGame();
@@ -302,9 +306,10 @@ class GameState extends ChangeNotifier {
     linesBeingCleared = [];
     clearAnimationProgress = 0.0;
     
-    // Check for lines again in case the drop formed new ones (Cascading Clear)
+    // PROACTIVE LINE DETECTION: Check if the drop formed new lines immediately
     _clearLines();
     
+    // Only resume gameplay if no more lines were found
     if (!isAnimatingClear) {
       _startTimer(); // Resume gravity
       spawnPiece(); // Spawn next piece
