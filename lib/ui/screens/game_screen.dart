@@ -283,7 +283,6 @@ class _TetrisGameState extends State<TetrisGame> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () => _handleTap(gameState),
-                                  onDoubleTap: gameState.hardDrop,
                                   onPanUpdate: (details) => _handlePanUpdate(details, gameState),
                                   onPanEnd: _handlePanEnd,
                                   child: Stack(
